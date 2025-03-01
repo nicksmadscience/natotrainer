@@ -64,7 +64,7 @@ def faacode():
 			for i in range(0, 2):
 				faa += random.choice(faaletters)
 
-	return faa
+	return faa, "US aircraft registration"
 
 
 def rc(ch):
@@ -82,13 +82,23 @@ def rl(count = 1):
 def lr(l="A", u="Z"):
 	return string.ascii_uppercase[(random.randint(l, u))]
 
+def onein(max, yea, nay):
+	if random.randint(0, max) == 0:
+		return yea
+	else:
+		return nay
+	
+
 
 
 def callsign():
-	type = random.randint(0, 7)
+	type = random.randint(0, 9)
+	name = ""
 
+	# source: https://en.wikipedia.org/wiki/Amateur_radio_licensing_in_the_United_States
 	if type == 0:
 		call = rc("KNW") + rn() + rl() + rl()
+		name = "US amateur radio, Group A"
 
 	elif type == 1:
 		var = random.randint(0, 1)
@@ -97,57 +107,80 @@ def callsign():
 		else:
 			call = rc("KNZ") + rl()
 		call += rn() + rl()
+		name = "US amateur radio, Group A"
 
 	elif type == 2:
 		call = "A" + lr(0, 11) + rn() + rl(2)
+		name = "US amateur radio, Group B"
 
 	elif type == 3:
 		call = rc("KNW") + rl() + rn() + rl(2)
+		name = "US amateur radio, Group B"
 
 	elif type == 4:
 		call = rc("KNW") + rn() + rl(3)
+		name = "US amateur radio, Group C"
 
 	elif type == 5:
 		call = rc(["KL", "NL", "WL", "NP", "WP", "KH", "NH", "WH"]) + rn () + rl(3)
+		name = "US amateur radio, Group C"
 
 	elif type == 6:
 		call = rc("KW") + rl() + rn() + rl(3)
+		name = "US amateur radio, Group D"
 
 	elif type == 7:
 		call = "K" + rl() + rn() + rl(3)
+		name = "US amateur radio, Group D"
+
+	elif type == 8:
+		call = "W" + onein(11, rl(2), rl(3))
+		name = "US commercial broadcast east"
+
+	elif type == 9:
+		call = "K" + onein(11, rl(2), rl(3))
+		name = "US commercial broadcast west"
+
+	return call, name
 
 
-	return call
+
+def eamprefix():
+	possible = string.ascii_uppercase + "234567"
+	st = ""
+	for i in range(0, 6):
+		st += random.choice(possible)
+
+	return st, "Emergency Action Message preamble"
 
 
 
 
-def natobuild(str):
+def natobuild(st):
 	outstring = ""
-	for chr in str:
+	for chr in st:
 		outstring += nato[chr] + " "
         
 	return outstring
 
 
 
-def getcode(faa = True, call = True):
+def getcode(faa = True, call = True, eam = False):
 	opt = []
 	if faa:
 		opt.append(faacode)
 	if call:
 		opt.append(callsign)
-	if not faa and not call:
+	if eam:
+		opt.append(eamprefix)
+	if not faa and not call and not eam:
 		opt.append(faacode)
 		opt.append(callsign)
 
-	st = random.choice(opt)()
-	
-	out = ""
-	for i in st:
-		out += nato[i] + " "
+	st, name = random.choice(opt)()
+	out = natobuild(st)
 		
-	return (st, out)
+	return (st, out, name)
 
         
 

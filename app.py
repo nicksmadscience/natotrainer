@@ -1,5 +1,5 @@
 from flask import Flask, Response, request, send_from_directory, render_template
-import json
+import json, markdown, os
 
 from natotrainer import *
 
@@ -21,7 +21,27 @@ def send_asset(path):
 def getcode_r():
 	faa = "faa" in request.args
 	call = "call" in request.args
-	return Response(json.dumps(getcode(faa, call)), mimetype="text/json")
+	ean = "ean" in request.args
+	return Response(json.dumps(getcode(faa, call, ean)), mimetype="text/json")
+
+
+
+def openmarkdownpage(mdfile):
+    with open(os.path.dirname(os.path.realpath(__file__)) + mdfile, "r", encoding='utf-8') as md_file:
+        return render_template("document.html", md=markdown.markdown(md_file.read(), extensions=['pymdownx.tilde', 'tables']))
+    
+
+    
+
+@app.route("/readme")
+def readme():
+	return openmarkdownpage("/README.md")
+
+
+@app.route("/guide")
+def guide():
+	return render_template("guide.html")
+
 
 
 

@@ -34,6 +34,7 @@ async function newcode()
 	jawn = await response.json();
 	document.getElementById("code").innerHTML = jawn[0];
 	document.getElementById("verbose").innerHTML = jawn[1];
+	document.getElementById("name").innerHTML = jawn[2];
 }
 
 window.onload = function() {
@@ -45,13 +46,14 @@ window.onload = function() {
 <div class="container">
 	<div class="center">
 		<div id="title">NATO Alphabet Trainer</div>
-		<div id="code">N600LL</div>
+		<div id="code-container">
+			<div id="code">N600LL</div>
+			<div id="name">rofl</div>
+		</div>
 		<div id="verbose">november six zero zero lima lima</div>
 		<button id="next" onclick="nextjawn()">next</button>
 	</div>
 </div>
-<div class="footer">
-	<div class="footer-inner">a tool by <a href="https://github.com/nicksmadscience/natotrainer">Nick Piegari</a></div>
-</div>
+{% include 'footer.html' %}
 
 {%- endblock %}
