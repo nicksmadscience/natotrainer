@@ -7,7 +7,7 @@ body
 	background-size: 100vw 100vh;
 	margin: 0;
 	font-weight: 300;
-	background: radial-gradient(circle at 0% 100%, #414d0b, transparent 100%),radial-gradient(circle at 100% 42.03%, #727a17, transparent 100%),radial-gradient(circle at 50% 50%, #ffffff, #ffffff 100%);
+	background: radial-gradient(circle at 0% 0%, rgb(116, 127, 76), transparent 100%),radial-gradient(circle at 100% 100%, rgb(61, 69, 32), transparent 100%),radial-gradient(circle at 50% 50%, #ffffff, #ffffff 100%);
 	min-height: 100vh;
 }
 
@@ -38,6 +38,10 @@ h1, h2, h3, h4, h5, h6
 	color: rgb(198, 255, 159);
 	text-shadow: 2px 2px 6px black;
 	letter-spacing: 5px;
+	border-top: 2px gray solid;
+	border-left: 2px gray solid;
+	border-bottom: 2px black solid;
+	border-right: 2px black solid;
 }
 
 #verbose
@@ -75,7 +79,6 @@ box-shadow: 0 6px 0 rgb(178, 178, 178),
 {
 	position: absolute;
 	bottom: 0;
-	color: white;
 	text-align: center;
 	left: 0;
 	right: 0;
@@ -89,6 +92,8 @@ box-shadow: 0 6px 0 rgb(178, 178, 178),
 .footer-inner
 {
 	display: inline-block;
+	color: white;
+	text-shadow: 0 2px 2px rgba(0,0,0,0.3);
 }
 
 .footer-inner a:visited, .footer-inner a:link
@@ -102,7 +107,7 @@ button
 	color: white;
 	background-color: #617214;
 	border: none;
-	padding: 4px 8px;
+	padding: 4px 13px;
 	box-shadow: 0 4px 0 #39430b,
 			2px 2px 6px rgba(0, 0, 0, 0.2);
 }
@@ -119,4 +124,17 @@ button:active
 	margin-bottom: -2px;
 	box-shadow: 0 2px 0 #39430b,
 			2px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.reveal
+{
+	background-color: #1d51a0;
+	box-shadow: 0 4px 0 #0b0c43,
+			2px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+button.reveal:hover, button.reveal:active
+{
+	background-color: #4486cb;
+	box-shadow: 0 4px 0 #12496d;
 }

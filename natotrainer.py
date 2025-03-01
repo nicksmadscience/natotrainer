@@ -46,7 +46,7 @@ def faacode():
 	faaletters = "ABCDEFGHJKLMNPQRSTUVWXYZ" # no I or O
 
 	faa = ""
-	while len(faa) < 4:  # rng loves making short codes, which exist but aren't terribly useful in this context
+	while len(faa) < 4: # rng loves making short codes, which exist but aren't terribly useful here
 		faa = "N"
 		faa += str(random.randint(1, 9)) # An N-Number may not begin with zero
 		
@@ -55,7 +55,7 @@ def faacode():
 			for i in range(0, random.randint(0, 4)):
 				faa += str(random.randint(0, 9))
 		elif version == 1:
-			for i in range(0, random.randint(0, 3)):
+			for i in range(0, random.randint(0, 2)): # can go up to 3 but again this is for letters
 				faa += str(random.randint(0, 9))
 			faa += random.choice(faaletters)
 		elif version == 2:

@@ -8,16 +8,21 @@ var cycle = true;
 
 function nextjawn()
 {
+	var verbose = document.getElementById("verbose");
+	var next = document.getElementById("next");
 	if (cycle)
 	{
 		newcode();
-		document.getElementById("verbose").style = "filter: blur(13px);";
-		document.getElementById("next").innerHTML = "reveal";
+		verbose.style = "filter: blur(13px);";
+		next.innerHTML = "reveal";
+		next.classList.add("reveal");
+
 	}
 	else
 	{
-		document.getElementById("verbose").style = "filter: blur(0);";
+		verbose.style = "filter: blur(0);";
 		document.getElementById("next").innerHTML = "next";
+		next.classList.remove("reveal");
 	}
 
 	cycle = !cycle;
@@ -40,8 +45,8 @@ window.onload = function() {
 <div class="container">
 	<div class="center">
 		<div id="title">NATO Alphabet Trainer</div>
-		<div id="code">N93GP</div>
-		<div id="verbose">november nine three golf papa</div>
+		<div id="code">N600LL</div>
+		<div id="verbose">november six zero zero lima lima</div>
 		<button id="next" onclick="nextjawn()">next</button>
 	</div>
 </div>
