@@ -1,0 +1,52 @@
+{% extends "base.html" -%}
+{% block body -%}
+
+<script type="text/javascript">
+
+
+var cycle = true;
+
+function nextjawn()
+{
+	if (cycle)
+	{
+		newcode();
+		document.getElementById("verbose").style = "filter: blur(13px);";
+		document.getElementById("next").innerHTML = "reveal";
+	}
+	else
+	{
+		document.getElementById("verbose").style = "filter: blur(0);";
+		document.getElementById("next").innerHTML = "next";
+	}
+
+	cycle = !cycle;
+}
+
+async function newcode() 
+{
+	const response = await fetch("getcode");
+	jawn = await response.json();
+	document.getElementById("code").innerHTML = jawn[0];
+	document.getElementById("verbose").innerHTML = jawn[1];
+}
+
+window.onload = function() {
+	nextjawn();
+}
+
+</script>
+
+<div class="container">
+	<div class="center">
+		<div id="title">NATO Trainer</div>
+		<div id="code">N93GP</div>
+		<div id="verbose">november nine three golf papa</div>
+		<button id="next" onclick="nextjawn()">next</button>
+	</div>
+</div>
+<div class="footer">
+	<div class="footer-inner">a tool by <a href="https://github.cwefom/nicksmadscience/">Nick Piegari</a></div>
+</div>
+
+{%- endblock %}
