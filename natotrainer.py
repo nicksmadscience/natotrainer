@@ -40,38 +40,27 @@ nato = {
 }
 
 
+def distinctletters(st):
+	dc = []
+	for c in st:
+		# print (dc)
+		if c in string.ascii_uppercase:
+			if c not in dc:
+				dc.append(c)
+
+	return len(dc)
 
 
-def faacode():
-	faaletters = "ABCDEFGHJKLMNPQRSTUVWXYZ" # no I or O
-
-	faa = ""
-	while len(faa) < 4: # rng loves making short codes, which exist but aren't terribly useful here
-		faa = "N"
-		faa += str(random.randint(1, 9)) # An N-Number may not begin with zero
-		
-		version = random.randint(1, 3)
-		if version == 0: # skipping this one because it's not very useful when learning letters
-			for i in range(0, random.randint(0, 4)):
-				faa += str(random.randint(0, 9))
-		elif version == 1:
-			for i in range(0, random.randint(0, 2)): # can go up to 3 but again this is for letters
-				faa += str(random.randint(0, 9))
-			faa += random.choice(faaletters)
-		elif version == 2:
-			for i in range(0, random.randint(0, 2)):
-				faa += str(random.randint(0, 9))
-			for i in range(0, 2):
-				faa += random.choice(faaletters)
-
-	return faa, "US aircraft registration"
 
 
 def rc(ch):
 	return random.choice(ch)
 
 def rn(l=0, u=9):
-	return str(random.randint(l, u))
+	return random.randint(l, u)
+
+def rns(l=0, u=9):
+	return str(rn(l, u))
 
 def rl(count = 1):
 	s = ""
@@ -91,13 +80,49 @@ def onein(max, yea, nay):
 
 
 
+def faacode():
+	faaletters = "ABCDEFGHJKLMNPQRSTUVWXYZ" # no I or O
+
+	faa = ""
+	distinctcount = 0
+
+	# rng loves making short codes, which exist but aren't terribly useful here
+	# also we need more than one letter to learn
+	while len(faa) < 4 or distinctcount < 2:
+
+		faa = "N"
+		faa += rns(1, 9) # An N-Number may not begin with zero
+		
+		version = random.randint(1, 3)
+		if version == 0: # skipping this one because it's not very useful when learning letters
+			for i in range(0, rn(0, 4)):
+				faa += rns(0, 9)
+		elif version == 1:
+			for i in range(0, rn(0, 2)): # can go up to 3 but again this is for letters
+				faa += rns(0, 9)
+			faa += rc(faaletters)
+		elif version == 2:
+			for i in range(0, rn(0, 2)):
+				faa += rns(0, 9)
+			for i in range(0, 2):
+				faa += rc(faaletters)
+
+		distinctcount = distinctletters(faa)
+
+	return faa, "US aircraft registration"
+
+
+	
+
+
+
 def callsign():
 	type = random.randint(0, 9)
 	name = ""
 
 	# source: https://en.wikipedia.org/wiki/Amateur_radio_licensing_in_the_United_States
 	if type == 0:
-		call = rc("KNW") + rn() + rl() + rl()
+		call = rc("KNW") + rns() + rl() + rl()
 		name = "US amateur radio, Group A"
 
 	elif type == 1:
@@ -106,31 +131,31 @@ def callsign():
 			call = "A" + lr(0, 11)
 		else:
 			call = rc("KNZ") + rl()
-		call += rn() + rl()
+		call += rns() + rl()
 		name = "US amateur radio, Group A"
 
 	elif type == 2:
-		call = "A" + lr(0, 11) + rn() + rl(2)
+		call = "A" + lr(0, 11) + rns() + rl(2)
 		name = "US amateur radio, Group B"
 
 	elif type == 3:
-		call = rc("KNW") + rl() + rn() + rl(2)
+		call = rc("KNW") + rl() + rns() + rl(2)
 		name = "US amateur radio, Group B"
 
 	elif type == 4:
-		call = rc("KNW") + rn() + rl(3)
+		call = rc("KNW") + rns() + rl(3)
 		name = "US amateur radio, Group C"
 
 	elif type == 5:
-		call = rc(["KL", "NL", "WL", "NP", "WP", "KH", "NH", "WH"]) + rn () + rl(3)
+		call = rc(["KL", "NL", "WL", "NP", "WP", "KH", "NH", "WH"]) + rns() + rl(3)
 		name = "US amateur radio, Group C"
 
 	elif type == 6:
-		call = rc("KW") + rl() + rn() + rl(3)
+		call = rc("KW") + rl() + rns() + rl(3)
 		name = "US amateur radio, Group D"
 
 	elif type == 7:
-		call = "K" + rl() + rn() + rl(3)
+		call = "K" + rl() + rns() + rl(3)
 		name = "US amateur radio, Group D"
 
 	elif type == 8:
