@@ -37,6 +37,7 @@ nato = {
 	"7": "seven",
 	"8": "eight",
 	"9": "niner",
+	"-": "",
 }
 
 
@@ -68,6 +69,7 @@ def rl(count = 1):
 		s += random.choice(string.ascii_uppercase)
 	return s
 
+
 def lr(l="A", u="Z"):
 	return string.ascii_uppercase[(random.randint(l, u))]
 
@@ -93,7 +95,7 @@ def faacode():
 		faa = "N"
 		faa += rns(1, 9) # An N-Number may not begin with zero
 		
-		version = random.randint(1, 3)
+		version = rn(1, 3)
 		if version == 0: # skipping this one because it's not very useful when learning letters
 			for i in range(0, rn(0, 4)):
 				faa += rns(0, 9)
@@ -110,6 +112,10 @@ def faacode():
 		distinctcount = distinctletters(faa)
 
 	return faa, "US aircraft registration"
+
+
+def cacode():
+	return "C-" + rc("FGC") + rl(3), "Canadian aircraft registration"
 
 
 	
@@ -190,7 +196,7 @@ def natobuild(st):
 
 
 
-def getcode(faa = True, call = True, eam = False):
+def getcode(faa = True, call = True, eam = False, ca = True):
 	opt = []
 	if faa:
 		opt.append(faacode)
@@ -198,9 +204,13 @@ def getcode(faa = True, call = True, eam = False):
 		opt.append(callsign)
 	if eam:
 		opt.append(eamprefix)
-	if not faa and not call and not eam:
+	if ca:
+		opt.append(cacode)
+	if not faa and not call and not eam and not ca:
 		opt.append(faacode)
 		opt.append(callsign)
+		opt.append(cacode)
+
 
 	st, name = random.choice(opt)()
 	out = natobuild(st)

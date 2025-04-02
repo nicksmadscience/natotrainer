@@ -22,7 +22,8 @@ def getcode_r():
 	faa = "faa" in request.args
 	call = "call" in request.args
 	ean = "ean" in request.args
-	return Response(json.dumps(getcode(faa, call, ean)), mimetype="text/json")
+	ca = "ca" in request.args
+	return Response(json.dumps(getcode(faa, call, ean, ca)), mimetype="text/json")
 
 
 
