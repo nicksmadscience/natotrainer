@@ -14,8 +14,7 @@ body
 
 .whitebody
 {
-	background: none;
-	background-color: white;
+	background: linear-gradient(to bottom, #CED2BE 0%, #B5BD9B 100%);
 }
 
 h1, h2, h3, h4, h5, h6
@@ -99,8 +98,6 @@ h1, h2, h3, h4, h5, h6
 {
 	display: grid;
 	place-items: center;
-	background-color: #DDE7B6;
-	background: linear-gradient(to bottom, #CED2BE 0%, #B5BD9B 100%);
 	text-align: center;
 	padding: 32px;
 }
