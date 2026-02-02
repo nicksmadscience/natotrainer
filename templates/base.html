@@ -3,7 +3,7 @@
 		<meta name="viewport" content="initial-scale=1.0" />
 		<link href="assets/nato.css" rel="stylesheet">
 	</head>
-	<body>
+	<body {% if mode == "embed" %}class="whitebody"{% endif %}>
 	{% block body %}
 
     {% endblock body %}

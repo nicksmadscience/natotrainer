@@ -7,7 +7,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-    return render_template("frontpage.html")
+	mode = request.args.get("mode") if "mode" in request.args else "normal"
+	return render_template("frontpage.html", mode=mode)
 
 
 

@@ -43,8 +43,14 @@ window.onload = function() {
 
 </script>
 
+{% if mode == "embed" %}
+<div class="embed">
+{% else %}
 <div class="container">
 	<div class="center">
+{% endif %}
+	
+
 		<div id="title">NATO Alphabet Trainer</div>
 		<div id="code-container">
 			<div id="code">N600LL</div>
@@ -52,8 +58,14 @@ window.onload = function() {
 		</div>
 		<div id="verbose">november six zero zero lima lima</div>
 		<button id="next" onclick="nextjawn()">next</button>
+{% if mode == "embed" %}
+</div>
+{% else %}
 	</div>
 </div>
 {% include 'footer.html' %}
+{% endif %}
+
+
 
 {%- endblock %}
